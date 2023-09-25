@@ -18,34 +18,31 @@ public class Calc {
 
     void goodsAdd() {
         while (true) {
-            try {
-                System.out.println("Введите название товара:");
-                String gds = MainCalc.scanner.nextLine();
-                //System.out.println("название товара:" + gds);
-                System.out.println("Введите цену товара:");
-                double price = MainCalc.scanner.nextDouble();
-                if (price < 0) throw new Exception();
-                System.out.println("Товар " + gds + " по цене " + String.format(MainCalc.loc,"%.2f", price) + " успешно добавлен!");
-                System.out.println(price);
-                goodsStr = goodsStr.concat("\n" + gds);
-                goodsSum += price;
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Ошибка ввода данных");
-                MainCalc.scanner.nextLine();
-                continue;
+            double priceProduct=-1;
+            System.out.println("Введите название товара:");
+            String nameProduct= MainCalc.scanner.nextLine();
+            System.out.println("Введите цену товара:");
+            if(MainCalc.scanner.hasNextDouble()){
+                priceProduct = MainCalc.scanner.nextDouble();
+                //MainCalc.scanner.nextLine();
             }
-            MainCalc.scanner.nextLine();
-            System.out.println("Добавить товар? (Для выхода введите \"завершить\")");
-            String sel = MainCalc.scanner.nextLine();
-            sel = sel.toLowerCase();
-            if (sel.equals("завершить")) {
-                System.out.println("Добавленные товары:" + goodsStr);
-                goodsSum /= numPeople;
-                System.out.println("Сумма на одного человека: " + String.format(MainCalc.loc,"%.2f ", goodsSum) + getOutStr(goodsSum));
-                break;
+            if((priceProduct>0)&&(nameProduct.length()>0)){
+                System.out.println("Товар " + nameProduct + " по цене " + String.format(MainCalc.loc,"%.2f", priceProduct) + " успешно добавлен!");
+                goodsStr = goodsStr.concat("\n" + nameProduct);
+                goodsSum += priceProduct;
+                System.out.println("Добавить следующий товар? (Для выхода введите \"завершить\")");
+                MainCalc.scanner.nextLine();
+                String sel = MainCalc.scanner.nextLine();
+                sel = sel.toLowerCase();
+                if (sel.equals("завершить")) {
+                    System.out.println("Добавленные товары:" + goodsStr);
+                    goodsSum /= numPeople;
+                    System.out.println("Сумма на одного человека: " + String.format(MainCalc.loc,"%.2f ", goodsSum) + getOutStr(goodsSum));
+                    break;
+                }
+            }else {
+                System.out.println("Ошибка ввода данных");
             }
         }
     }
 }
-
