@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class MainCalc {
     public static final Scanner scanner = new Scanner(System.in);
     public static final Locale loc = new Locale("en", "US");
-    private static int getInt(String str){
-        System.out.println(str);
+    private static int getInt(){
+        System.out.println("Введите количество человек");
         while (true) {
             if (scanner.hasNextInt()) {
                 int i =scanner.nextInt();
@@ -20,7 +20,7 @@ public class MainCalc {
 
     public static void main(String[] args) {
         scanner.useLocale(loc);
-        int numPeople = getInt("Введите количество человек");
+        int numPeople = getInt();
         System.out.println("количество человек:" + numPeople);
         scanner.nextLine();
         Calc clc=new Calc(numPeople);
