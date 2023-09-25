@@ -24,7 +24,6 @@ public class Calc {
             System.out.println("Введите цену товара:");
             if(MainCalc.scanner.hasNextDouble()){
                 priceProduct = MainCalc.scanner.nextDouble();
-                //
             }
             if((priceProduct>0)&&(nameProduct.length()>0)){
                 System.out.println("Товар " + nameProduct + " по цене " + String.format(MainCalc.loc,"%.2f", priceProduct) + " успешно добавлен!");
