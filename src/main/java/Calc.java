@@ -1,10 +1,15 @@
+import java.util.Locale;
+import java.util.Scanner;
+
 public class Calc {
     private double goodsSum;
     private final int numPeople;
     private String goodsStr = "";
+    private final Scanner scan;
 
-    Calc(int nPeople) {
+    Calc(int nPeople, Scanner scan) {
         numPeople = nPeople;
+        this.scan=scan;
     }
 
     private String getOutStr(double sum) {
@@ -20,35 +25,36 @@ public class Calc {
         while (true) {
             double priceProduct=-1;
             System.out.println("Введите название товара:");
-            String nameProduct= MainCalc.scanner.nextLine();
+            String nameProduct= scan.nextLine();
             if(nameProduct.length()>0){
                 System.out.println("Введите цену товара:");
-                if(MainCalc.scanner.hasNextDouble()){
-                    priceProduct = MainCalc.scanner.nextDouble();
+                if(scan.hasNextDouble()){
+                    priceProduct = scan.nextDouble();
                 }else {
                     while (true){
-                        if(!(MainCalc.scanner.nextLine().equals(""))) break;
+                        if(!(scan.nextLine().equals(""))) break;
                     }
                 }
             }
             if(priceProduct>0){
-                System.out.println("Товар " + nameProduct + " по цене " + String.format(MainCalc.loc,"%.2f", priceProduct) + " успешно добавлен!");
+                System.out.println("Товар " + nameProduct + " по цене " + String.format(Locale.ENGLISH,"%.2f", priceProduct) + " успешно добавлен!");
                 goodsStr = goodsStr.concat("\n" + nameProduct);
                 goodsSum += priceProduct;
                 System.out.println("Добавить следующий товар? (Для выхода введите \"завершить\")");
-                MainCalc.scanner.nextLine();
-                String sel = MainCalc.scanner.nextLine();
+                scan.nextLine();
+                String sel = scan.nextLine();
                 sel = sel.toLowerCase();
                 if (sel.equals("завершить")) {
                     System.out.println("Добавленные товары:" + goodsStr);
                     goodsSum /= numPeople;
-                    System.out.println("Сумма на одного человека: " + String.format(MainCalc.loc,"%.2f ", goodsSum) + getOutStr(goodsSum));
+                    StringBuilder strB=new StringBuilder("Сумма на одного человека: ").append(String.format(Locale.ENGLISH,"%.2f ", goodsSum)).append(getOutStr(goodsSum));
+                    System.out.println(strB);
+                    //System.out.println("Сумма на одного человека: " + String.format(MainCalc.loc,"%.2f ", goodsSum) + getOutStr(goodsSum));
+
                     break;
                 }
             }else {
                 System.out.println("Ошибка ввода данных");
-                //if(nameProduct.length()<0) MainCalc.scanner.nextLine();
-
             }
         }
     }
