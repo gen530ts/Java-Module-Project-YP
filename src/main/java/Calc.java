@@ -21,11 +21,17 @@ public class Calc {
             double priceProduct=-1;
             System.out.println("Введите название товара:");
             String nameProduct= MainCalc.scanner.nextLine();
-            System.out.println("Введите цену товара:");
-            if(MainCalc.scanner.hasNextDouble()){
-                priceProduct = MainCalc.scanner.nextDouble();
+            if(nameProduct.length()>0){
+                System.out.println("Введите цену товара:");
+                if(MainCalc.scanner.hasNextDouble()){
+                    priceProduct = MainCalc.scanner.nextDouble();
+                }else {
+                    while (true){
+                        if(!(MainCalc.scanner.nextLine().equals(""))) break;
+                    }
+                }
             }
-            if((priceProduct>0)&&(nameProduct.length()>0)){
+            if(priceProduct>0){
                 System.out.println("Товар " + nameProduct + " по цене " + String.format(MainCalc.loc,"%.2f", priceProduct) + " успешно добавлен!");
                 goodsStr = goodsStr.concat("\n" + nameProduct);
                 goodsSum += priceProduct;
@@ -41,7 +47,8 @@ public class Calc {
                 }
             }else {
                 System.out.println("Ошибка ввода данных");
-                MainCalc.scanner.nextLine();
+                //if(nameProduct.length()<0) MainCalc.scanner.nextLine();
+
             }
         }
     }
