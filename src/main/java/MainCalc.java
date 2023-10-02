@@ -3,15 +3,14 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class MainCalc {
-    // public static final Locale loc = new Locale("en", "US");
-    private static int getInt(Scanner scn) {
+    private static int getInt(Scanner scanner) {
         System.out.println("Введите количество человек");
         while (true) {
-            if (scn.hasNextInt()) {
-                int numPeople = scn.nextInt();
+            if (scanner.hasNextInt()) {
+                int numPeople = scanner.nextInt();
                 if (numPeople > 1) return numPeople;
             } else {
-                scn.next();
+                scanner.next();
             }
             System.out.println("Ошибка.Введите количество человек еще раз");
         }
